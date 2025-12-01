@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAD INTERACTIVE - Game & 3D Art Studio</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Font: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Tailwind Configuration - Strictly Black and White/Grey -->
+    <script>
+        // COMMENT: Tailwind configuration for colors and fonts
+        tailwind.config = {
+            // Removed darkMode setting as the theme is fixed to dark.
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        // Monochrome palette
+                        'primary-dark': '#1a1a1a', 
+                        'primary-light': '#f0f0f0', 
+                        'accent-grey': '#b3b3b3',
+                        // Monochrome Glass definition
+                        'glass-dark': 'rgba(255, 255, 255, 0.05)', 
+                        'glass-border': 'rgba(255, 255, 255, 0.1)', 
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for Glassmorphism and Monochrome Aesthetics (Locked to Dark Theme) -->
+    <style>
+        /* COMMENT: Site is permanently locked to the dark, monochrome theme. */
+        body { 
+            min-height: 100vh;
+            background: radial-gradient(ellipse at top right, #111827 0%, #000000 100%);
+            color: #f5f5f5; /* Light text on dark background */
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* COMMENT: Base Glass Panel styling - dark mode definition */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        /* COMMENT: Navigation link active state, strictly white/black */
+        .nav-link {
+            transition: all 0.2s;
+            color: #b3b3b3; /* Default text color in dark mode */
+        }
+        .nav-link:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .nav-link.active {
+            color: black;
+            background-color: white; 
+            font-weight: 700;
+        }
+
+        /* COMMENT: Scrollbar styling for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #111111;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333333;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555555;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main Container -->
+    <div class="relative min-h-screen z-10">
+
+        <!-- HEADER / NAVIGATION BAR -->
+        <header class="sticky top-0 z-50 glass-panel shadow-lg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+                
+                <!-- Logo & Studio Name (Black/White Themed) -->
+                <div class="flex items-center space-x-3">
+                    <!-- COMMENT: Simple Logo Icon placeholder for the MAD theme -->
+                    <div class="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center font-bold text-xl shadow-inner">
+                        <i class="fa-solid fa-code-branch"></i> 
+                    </div>
+                    <!-- Studio Name -->
+                    <span class="text-3xl font-extrabold tracking-tighter">
+                        MAD INTERACTIVE
+                    </span>
+                </div>
+                
+                <!-- Desktop Navigation and Mobile Menu Button -->
+                <div class="flex items-center space-x-3">
+                    <!-- Desktop Navigation -->
+                    <nav class="hidden md:flex space-x-1">
+                        <!-- Navigation links now use default classes without dark/light prefixes -->
+                        <a href="#hero" class="nav-link px-4 py-2 rounded-xl transition-colors active">Home</a>
+                        <a href="#featured-game" class="nav-link px-4 py-2 rounded-xl transition-colors">Games</a>
+                        <a href="#art-portfolio" class="nav-link px-4 py-2 rounded-xl transition-colors">3D Art</a>
+                        <a href="#about" class="nav-link px-4 py-2 rounded-xl transition-colors">About Us</a>
+                    </nav>
+
+                    <!-- COMMENT: Removed Theme Toggle Button -->
+                    
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="md:hidden text-white text-2xl p-2 rounded-full hover:bg-glass-dark">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobile-menu" class="hidden md:hidden absolute w-full glass-panel border-t border-glass-border shadow-2xl">
+                <nav class="flex flex-col p-4 space-y-2">
+                    <a href="#hero" onclick="toggleMobileMenu()" class="nav-link px-4 py-3 rounded-xl font-medium bg-white/10">Home</a>
+                    <a href="#featured-game" onclick="toggleMobileMenu()" class="nav-link px-4 py-3 rounded-xl hover:bg-white/5">Games</a>
+                    <a href="#art-portfolio" onclick="toggleMobileMenu()" class="nav-link px-4 py-3 rounded-xl hover:bg-white/5">3D Art</a>
+                    <a href="#about" onclick="toggleMobileMenu()" class="nav-link px-4 py-3 rounded-xl hover:bg-white/5">About Us</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- MAIN CONTENT SECTIONS -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-24">
+
+            <!-- 1. HERO SECTION: Studio Introduction (UPDATED HIERARCHY) -->
+            <section id="hero" class="relative text-center py-20 lg:py-32 glass-panel rounded-3xl shadow-2xl overflow-hidden border-2 border-white/20">
+                
+                <!-- Background visual overlay (monochrome pattern) -->
+                <div class="absolute inset-0 bg-white/5 opacity-5 pointer-events-none"></div>
+
+                <div class="relative z-10 max-w-4xl mx-auto">
+                    
+                    <!-- COMMENT: Circular Logo Placeholder with Drop Shadow Effect -->
+                    <div class="mb-8 mx-auto w-32 h-32 rounded-full bg-white flex items-center justify-center text-black shadow-[0_0_50px_rgba(255,255,255,0.8)] border-4 border-black/10 transition transform hover:scale-105">
+                        <i class="fa-solid fa-code-branch text-5xl"></i> <!-- Placeholder Icon for MAD INTERACTIVE -->
+                    </div>
+
+                    <!-- COMMENT: H1: MAD INTERACTIVE (Largest Text) -->
+                    <h1 class="text-7xl md:text-9xl font-black leading-none mb-6 text-white">
+                        MAD INTERACTIVE
+                    </h1>
+                    
+                    <!-- COMMENT: H2: Founder Text (Next largest text, highly visible) -->
+                    <h2 class="text-3xl md:text-5xl font-extrabold text-accent-grey leading-tight mb-3">
+                        FOUNDED BY LOKESH SHARMA
+                    </h2>
+                    
+                    <!-- COMMENT: Service Sub-Heading (Smaller than H1/H2) -->
+                    <p class="text-xl md:text-3xl font-medium text-primary-light/80 mb-8">
+                        Game Development and Digital Art Delivery
+                    </p>
+
+                    <p class="text-xl mt-6 mb-8 max-w-2xl mx-auto text-primary-light/80">
+                        A collective of passionate college students crafting immersive game experiences and cutting-edge 3D art.
+                    </p>
+                    <a href="#featured-game" class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white text-black text-lg font-bold shadow-2xl hover:bg-gray-200 transition-all transform hover:scale-[1.03]">
+                        Explore Our Projects <i class="fa-solid fa-arrow-right ml-3"></i>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 2. FEATURED GAME TRAILER (Video Section) -->
+            <section id="featured-game" class="space-y-12">
+                <h2 class="text-5xl font-extrabold text-center">
+                    Featured Project: VOID RUNNER
+                </h2>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <!-- 
+                        COMMENT START: GAME CONTENT BLOCK
+                        To add more games:
+                        1. Copy the entire 'Video Embed Card' (lg:col-span-2) and the 'Game Info & Download Link' (flex flex-col) blocks below.
+                        2. Place them here, within the grid. You might want to adjust the grid layout (e.g., change lg:grid-cols-3 to lg:grid-cols-2 for two-column listing) in the parent <div> if listing multiple games side-by-side.
+                        3. Update the h3 titles, iframe src, and the game-link href.
+                    -->
+                    
+                    <!-- Video Embed Card (I use a standard YouTube trailer placeholder) -->
+                    <div class="lg:col-span-2 glass-panel rounded-3xl p-4 shadow-xl">
+                        <div class="aspect-w-16 aspect-h-9 w-full rounded-2xl overflow-hidden border border-glass-border">
+                            <!-- COMMENT: Replace the YouTube embed URL below with your actual game trailer video URL -->
+                            <iframe 
+                                class="w-full h-full" 
+                                src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen
+                                title="Game Trailer Placeholder (Replace with actual video URL)">
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <!-- Game Info & Download Link -->
+                    <div class="flex flex-col space-y-6">
+                        <div class="glass-panel p-6 rounded-3xl flex-1 shadow-lg">
+                            <h3 class="text-2xl font-bold mb-3">About VOID RUNNER</h3>
+                            <p class="text-accent-grey mb-6">
+                                A high-speed, monochrome arcade experience crafted entirely by the MAD INTERACTIVE student team.
+                            </p>
+                            <!-- COMMENT: Project Details List - Add more details here about the game -->
+                            <ul class="space-y-2 text-sm text-primary-light">
+                                <li class="flex items-center"><i class="fa-solid fa-code mr-3"></i> Platform: Cloud Web App</li>
+                                <li class="flex items-center"><i class="fa-solid fa-calendar-alt mr-3"></i> Release: Q4 2025</li>
+                                <li class="flex items-center"><i class="fa-solid fa-users mr-3"></i> Genre: Arcade/Survival</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Game Link Button (Objective 3 link placeholder) -->
+                        <div class="glass-panel p-6 rounded-3xl shadow-lg border-2 border-primary-dark">
+                            <h3 class="text-xl font-bold mb-4">PLAY NOW</h3>
+                            <a id="game-link" href="./void_runner_game.html" target="_blank" class="w-full inline-block text-center px-6 py-3 rounded-xl bg-white text-black font-bold text-lg shadow-md hover:bg-gray-300 transition-all transform hover:-translate-y-0.5">
+                                Download/Access Game <i class="fa-solid fa-gamepad ml-3"></i>
+                            </a>
+                            <p class="text-xs text-accent-grey mt-2 text-center">Cloud Hosting Link Required</p>
+                        </div>
+                    </div>
+
+                    <!-- COMMENT END: GAME CONTENT BLOCK -->
+                </div>
+            </section>
+
+            <!-- 3. 3D ART PORTFOLIO SECTION -->
+            <section id="art-portfolio" class="space-y-12">
+                <h2 class="text-5xl font-extrabold text-center">
+                    Our 3D Art Showcase
+                </h2>
+                <!-- COMMENT START: 3D ART PROJECTS GRID -->
+                <!-- To add more 3D projects, copy the 'Art Piece' div and paste it below inside the parent grid. -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <!-- Art Piece 1 (Add more art pieces by copying this block) -->
+                    <div class="glass-panel rounded-2xl overflow-hidden shadow-lg p-5 group hover:border-white/40 transition">
+                        <div class="aspect-square bg-gray-900 rounded-xl mb-4 flex items-center justify-center text-accent-grey text-4xl">
+                            <!-- COMMENT: Replace placeholder image URL (or use a simple SVG/CSS art) -->
+                            <img src="https://placehold.co/400x400/1a1a1a/cccccc?text=Mono+Character+Concept" alt="3D Art Concept 1" class="w-full h-full object-cover rounded-xl group-hover:scale-[1.05] transition-transform duration-300 opacity-80">
+                        </div>
+                        <h3 class="text-xl font-bold">Monochrome Cyberpunk</h3>
+                        <p class="text-sm text-accent-grey">Character Concept Art, ZBrush/Blender.</p>
+                        <!-- COMMENT: Add more project details here -->
+                    </div>
+
+                    <!-- Art Piece 2 -->
+                    <div class="glass-panel rounded-2xl overflow-hidden shadow-lg p-5 group hover:border-white/40 transition">
+                        <div class="aspect-square bg-gray-900 rounded-xl mb-4 flex items-center justify-center text-accent-grey text-4xl">
+                            <!-- COMMENT: Replace placeholder image URL (or use a simple SVG/CSS art) -->
+                            <img src="https://placehold.co/400x400/222222/bbbbbb?text=Abstract+Environment" alt="3D Art Concept 2" class="w-full h-full object-cover rounded-xl group-hover:scale-[1.05] transition-transform duration-300 opacity-80">
+                        </div>
+                        <h3 class="text-xl font-bold">Procedural Environment</h3>
+                        <p class="text-sm text-accent-grey">Unreal Engine 5, Level Design.</p>
+                        <!-- COMMENT: Add more project details here -->
+                    </div>
+
+                    <!-- Art Piece 3 -->
+                    <div class="glass-panel rounded-2xl overflow-hidden shadow-lg p-5 group hover:border-white/40 transition">
+                        <div class="aspect-square bg-gray-900 rounded-xl mb-4 flex items-center justify-center text-accent-grey text-4xl">
+                            <!-- COMMENT: Replace placeholder image URL (or use a simple SVG/CSS art) -->
+                            <img src="https://placehold.co/400x400/333333/dddddd?text=Weapon+Modeling" alt="3D Art Concept 3" class="w-full h-full object-cover rounded-xl group-hover:scale-[1.05] transition-transform duration-300 opacity-80">
+                        </div>
+                        <h3 class="text-xl font-bold">Sci-Fi Weapon Asset</h3>
+                        <p class="text-sm text-accent-grey">High-Poly Modeling & Texturing, Substance Painter.</p>
+                        <!-- COMMENT: Add more project details here -->
+                    </div>
+                </div>
+                <!-- COMMENT END: 3D ART PROJECTS GRID -->
+                
+                <div class="text-center pt-8">
+                    <button class="px-8 py-3 rounded-full bg-white/10 text-white font-bold hover:bg-white/20 transition">
+                        View Full Gallery <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- 4. ABOUT / TEAM SECTION -->
+            <section id="about" class="space-y-10">
+                <h2 class="text-5xl font-extrabold text-center">
+                    The Studio: MAD INTERACTIVE
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Founder Card -->
+                    <div class="glass-panel p-8 rounded-3xl text-center shadow-2xl border-2 border-white/30 md:col-span-1">
+                        <img src="https://placehold.co/128x128/ffffff/000000?text=LS" alt="Lokesh Sharma" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white shadow-lg">
+                        <h3 class="text-2xl font-bold text-black bg-white inline-block px-3 rounded-full">Lokesh Sharma</h3>
+                        <p class="text-sm text-accent-grey mt-2">Founder & Lead Developer</p>
+                        <p class="text-sm mt-4 text-primary-light/90">
+                            Driving the vision for next-generation immersive experiences and overseeing the technical pipeline.
+                        </p>
+                    </div>
+
+                    <!-- Mission & Team Summary -->
+                    <div class="md:col-span-2 glass-panel p-8 rounded-3xl shadow-xl space-y-6 flex flex-col justify-center">
+                        <p class="text-lg font-medium text-primary-light">
+                            MAD INTERACTIVE is more than just a studio; it's a dynamic college student group dedicated to transforming academic potential into professional-grade projects. We believe in learning by shipping.
+                        </p>
+                        <div class="flex items-center space-x-4">
+                            <i class="fa-solid fa-user-graduate text-3xl"></i>
+                            <p class="text-xl font-bold">15+ College Members</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <i class="fa-solid fa-code text-3xl"></i>
+                            <p class="text-xl font-bold">Focus on Modern Engine Tech</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="glass-panel mt-16 py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-accent-grey">
+                &copy; 2025 MAD INTERACTIVE. All Rights Reserved. Founded by Lokesh Sharma.
+                <div class="mt-4 space-x-6">
+                    <a href="https://github.com/YourUsername/mad-interactive-portal" target="_blank" class="hover:text-white transition"><i class="fa-brands fa-github text-xl"></i> GitHub</a>
+                    <a href="#" class="hover:text-white transition"><i class="fa-brands fa-x-twitter text-xl"></i> Twitter</a>
+                    <a href="#" class="hover:text-white transition"><i class="fa-solid fa-envelope text-xl"></i> Contact</a>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- JAVASCRIPT FOR MOBILE MENU AND THEME TOGGLE -->
+    <script>
+        // COMMENT: Simple logic to toggle the mobile navigation menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // COMMENT: Removed all theme toggle functions and initialization logic as requested.
+        
+        // COMMENT: Simple scroll-to logic for smooth navigation and active state update
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                // Get the target element by ID and scroll to it smoothly
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Update active link style 
+                document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
