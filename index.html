@@ -192,40 +192,7 @@
                         1. Copy the entire 'Video Embed Card' (lg:col-span-2) and the 'Game Info & Download Link' (flex flex-col) blocks below.
                         2. Place them here, within the grid. You might want to adjust the grid layout (e.g., change lg:grid-cols-3 to lg:grid-cols-2 for two-column listing) in the parent <div> if listing multiple games side-by-side.
                         3. Update the h3 titles, iframe src, and the game-link href.
-                    --><!-- Video Embed Card (I use a standard YouTube trailer placeholder) --><div class="lg:col-span-2 glass-panel rounded-3xl p-4 shadow-xl">
-                        <div class="aspect-w-16 aspect-h-9 w-full rounded-2xl overflow-hidden border border-glass-border">
-                            <!-- COMMENT: Replace the YouTube embed URL below with your actual game trailer video URL --><iframe 
-                                class="w-full h-full" 
-                                src="https://www.youtube.com/embed/dQw4w9WgXcQ?controls=0" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                allowfullscreen
-                                title="Game Trailer Placeholder (Replace with actual video URL)">
-                            </iframe>
-                        </div>
-                    </div>
-
-                    <!-- Game Info & Download Link --><div class="flex flex-col space-y-6">
-                        <div class="glass-panel p-6 rounded-3xl flex-1 shadow-lg">
-                            <h3 class="text-2xl font-bold mb-3">About VOID RUNNER</h3>
-                            <p class="text-accent-grey mb-6">
-                                A high-speed, monochrome arcade experience crafted entirely by the MAD INTERACTIVE student team.
-                            </p>
-                            <!-- COMMENT: Project Details List - Add more details here about the game --><ul class="space-y-2 text-sm text-primary-light">
-                                <li class="flex items-center"><i class="fa-solid fa-code mr-3"></i> Platform: Cloud Web App</li>
-                                <li class="flex items-center"><i class="fa-solid fa-calendar-alt mr-3"></i> Release: Q4 2025</li>
-                                <li class="flex items-center"><i class="fa-solid fa-users mr-3"></i> Genre: Arcade/Survival</li>
-                            </ul>
-                        </div>
-                        
-                        <!-- Game Link Button (Objective 3 link placeholder) --><div class="glass-panel p-6 rounded-3xl shadow-lg border-2 border-primary-dark">
-                            <h3 class="text-xl font-bold mb-4">PLAY NOW</h3>
-                            <a id="game-link" href="./void_runner_game.html" target="_blank" class="w-full inline-block text-center px-6 py-3 rounded-xl bg-white text-black font-bold text-lg shadow-md hover:bg-gray-300 transition-all transform hover:-translate-y-0.5">
-                                Download/Access Game <i class="fa-solid fa-gamepad ml-3"></i>
-                            </a>
-                            <p class="text-xs text-accent-grey mt-2 text-center">Cloud Hosting Link Required</p>
-                        </div>
-                    </div>
+                    --><!-- Video Embed Card (I use a standard YouTube trailer placeholder) -->
 		    <!-- COMMENT 2nd: GAME CONTENT BLOCK -->
                     <div class="lg:col-span-2 glass-panel rounded-3xl p-4 shadow-xl">
     <div class="video-responsive">
@@ -261,6 +228,41 @@
                         </div>
                     </div>
 
+
+                    <!-- COMMENT 3rd: GAME CONTENT BLOCK -->
+                    <div class="lg:col-span-2 glass-panel rounded-3xl p-4 shadow-xl">
+    <div class="video-responsive">
+        <iframe 
+            src="assets/Voidrunner.png" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen
+            title="Game Trailer Placeholder">
+        </iframe>
+    </div>
+</div>
+
+                    <!-- Game Info & Download Link --><div class="flex flex-col space-y-6">
+                        <div class="glass-panel p-6 rounded-3xl flex-1 shadow-lg">
+                            <h3 class="text-2xl font-bold mb-3">Global Chess Championship</h3>
+                            <p class="text-accent-grey mb-6">
+                                A 3d Chess Game, visually arcade experience crafted entirely by the MAD INTERACTIVE student team.
+                            </p>
+                            <!-- COMMENT: Project Details List - Add more details here about the game --><ul class="space-y-2 text-sm text-primary-light">
+                                <li class="flex items-center"><i class="fa-solid fa-code mr-3"></i> Platform: Windows</li>
+                                <li class="flex items-center"><i class="fa-solid fa-calendar-alt mr-3"></i> Release: Q4 2025</li>
+                                <li class="flex items-center"><i class="fa-solid fa-users mr-3"></i> Genre: Strategy</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Game Link Button (Objective 3 link placeholder) --><div class="glass-panel p-6 rounded-3xl shadow-lg border-2 border-primary-dark">
+                            <h3 class="text-xl font-bold mb-4">PLAY NOW</h3>
+                            <a id="game-link" href="./void_runner_game.html" target="_blank" class="w-full inline-block text-center px-6 py-3 rounded-xl bg-white text-black font-bold text-lg shadow-md hover:bg-gray-300 transition-all transform hover:-translate-y-0.5">
+                                Download/Access Game <i class="fa-solid fa-gamepad ml-3"></i>
+                            </a>
+                           
+                        </div>
+                    </div>
 
                     <!-- COMMENT END: GAME CONTENT BLOCK --></div>
             </section>
